@@ -1,0 +1,3 @@
+﻿User-agent: *
+Disallow: /WebResource.axd
+Disallow: /*.axd$

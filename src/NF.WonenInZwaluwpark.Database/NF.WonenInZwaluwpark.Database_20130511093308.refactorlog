@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0">
+  <Operation Name="Rename Refactor" Key="19c93be8-4649-4b4a-b27d-7ecf0c64bdaf" ChangeDateTime="10/04/2010 18:51:30">
+    <Property Name="ElementName" Value="[dbo].[ForumSubCatagory]" />
+    <Property Name="ElementType" Value="ISql100Table" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="ISql90Schema" />
+    <Property Name="NewName" Value="[ForumSubCategory]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c25f483d-912b-4e94-9bae-a9c0a398ed31" ChangeDateTime="10/04/2010 18:51:43">
+    <Property Name="ElementName" Value="[dbo].[ForumCatagory]" />
+    <Property Name="ElementType" Value="ISql100Table" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="ISql90Schema" />
+    <Property Name="NewName" Value="[ForumCategory]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a90cc860-a9b8-4bab-ad39-c874118ca903" ChangeDateTime="10/04/2010 18:58:10">
+    <Property Name="ElementName" Value="[dbo].[ForumSubCategory].[ForumCatagoryId]" />
+    <Property Name="ElementType" Value="ISql100SimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ForumSubCategory]" />
+    <Property Name="ParentElementType" Value="ISql100Table" />
+    <Property Name="NewName" Value="ForumCategoryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f1144410-0d1a-4e8c-b90a-57d66da6836a" ChangeDateTime="10/04/2010 19:00:45">
+    <Property Name="ElementName" Value="[dbo].[UserProfile].[Id]" />
+    <Property Name="ElementType" Value="ISql100SimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfile]" />
+    <Property Name="ParentElementType" Value="ISql100Table" />
+    <Property Name="NewName" Value="UniqueName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c04b4e68-adc1-4425-875b-c300fdfac252" ChangeDateTime="10/04/2010 19:06:42">
+    <Property Name="ElementName" Value="[dbo].[FK_ForumPost_SubCategoryId]" />
+    <Property Name="ElementType" Value="ISql90ForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[ForumPost]" />
+    <Property Name="ParentElementType" Value="ISql100Table" />
+    <Property Name="NewName" Value="[FK_ForumPost_ForumSubCategoryId]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8088ecd8-dd77-4724-bee4-2a1190ce9ec2" ChangeDateTime="10/04/2010 19:07:35">
+    <Property Name="ElementName" Value="[dbo].[ForumPost].[SubcategoryId]" />
+    <Property Name="ElementType" Value="ISql100SimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ForumPost]" />
+    <Property Name="ParentElementType" Value="ISql100Table" />
+    <Property Name="NewName" Value="ForumSubCategoryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fb39f1ab-3829-4e46-a027-8709f0ce2d99" ChangeDateTime="10/24/2010 09:29:41">
+    <Property Name="ElementName" Value="[dbo].[ForumSubCategory].[LastPost]" />
+    <Property Name="ElementType" Value="ISql100SimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ForumSubCategory]" />
+    <Property Name="ParentElementType" Value="ISql100Table" />
+    <Property Name="NewName" Value="LastPostDate" />
+  </Operation>
+</Operations>

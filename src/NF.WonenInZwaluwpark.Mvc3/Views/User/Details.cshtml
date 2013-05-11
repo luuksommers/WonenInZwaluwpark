@@ -1,0 +1,67 @@
+﻿@model NF.WonenInZwaluwpark.Mvc3.Models.UserProfile
+              
+@{
+    if( Model != null && (Model.Share || User.Identity.Name == Model.UniqueName))
+    {
+        ViewBag.Title = Model.FriendlyName;
+    }
+    else
+    {
+        ViewBag.Title = "Profiel onbekend";
+    }
+}
+
+@if (Model == null)
+{
+    <text>Profiel onbekend</text>
+}
+else if( (User.Identity.Name != Model.UniqueName) && Model.Share == false  )
+{
+    <text>Profiel niet publiek zichtbaar</text>
+}
+else
+{
+<div class="vcard">
+<h1 class="fn">@Html.GenderToImage( Model.Gender ) @Model.FriendlyName</h1>
+<p class="adr">
+@if (Model.HouseNbr < 37)
+{
+    <text>
+    <span class="street-address">Groot vijverdal @Model.HouseNbr</span><br />
+    <span class="postal-code">6822MB</span>  <span class="locality">Arnhem</span>
+    </text>
+}
+else
+{
+    <text>
+    <span class="street-address">Klein vijverdal @(Model.HouseNbr - 36)</span><br />
+    <span class="postal-code">6822MA</span>  <span class="locality">Arnhem</span>
+    </text>
+}
+</p>
+<a class="email" href="mailto:@Model.EmailAddress">@Model.EmailAddress</a><p>
+@if (!string.IsNullOrEmpty(Model.HyvesUrl))
+{
+<text>
+<span class="url"><span class="type" style="display:none">Hyves</span><a class="value" href="@Model.HyvesUrl" target="_blank"><img src="@Url.Content("~\\Images\\hyves.png")" /> Hyves</a></span><br />
+</text>
+}
+@if (!string.IsNullOrEmpty(Model.FacebookUrl))
+{
+<text>
+<span class="url"><span class="type" style="display:none">Facebook</span><a class="value" href="@Model.FacebookUrl" target="_blank"><img src="@Url.Content("~\\Images\\facebopk.png")" /> Facebook</a></span><br />
+</text>
+}
+@if (!string.IsNullOrEmpty(Model.LinkedInUrl))
+{
+<text>
+<span class="url"><span class="type" style="display:none">LinkedIn</span> <a class="value" href="@Model.LinkedInUrl" target="_blank"><img src="@Url.Content("~\\Images\\linkedin.png")" /> Linkedin</a></span><br />
+</text>
+}
+<p style="font-size: smaller;">This content uses <a rel="profile" href="http://microformats.org/profile/hcard">hCard</a>.</p>
+@if (User.Identity.Name == Model.UniqueName)
+{
+    @Html.ActionLink("Bewerken", "Edit", null, new { @class = "button editprofile" })
+}
+</div>
+}

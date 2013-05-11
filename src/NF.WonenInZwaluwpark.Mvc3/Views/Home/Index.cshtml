@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Wonen in Zwaluwpark";
+}
+
+<h1>Welkom bij wonen in Zwaluwpark</h1>
+<p>Op deze pagina willen wij, @Html.ActionLink("Luuk & Marion", "Details", "User", new{id=6}, null ) een community maken voor de bewoners van het Zwaluwpark.</p>
+<h2>Twitter updates</h2>
+
+@foreach (var t in (ViewData["tweets"] as List<LinqToTwitter.Status>).Take( 7 ) )
+{
+<strong>@string.Format("{0:dd-MM-yyyy}", t.CreatedAt ):</strong> @t.Text<br />
+}
+<a href="http://twitter.com/#!/zwaluwpark" class="button twitter" target="_blank">Lees meer</a>
+
+<h2>Laatste Nieuws</h2>
+<strong>25-09-2011:</strong> Sortering van het forum aangepast. Nieuwste berichten staan nu bovenaan.<br />
+@*
+<strong>29-05-2011:</strong> Foto's van dag van de bouw toegevoegd en nieuwe posts vanaf je laatste bezoek worden nu anders weergegeven.<br />
+<strong>23-01-2011:</strong> Nieuwe header en logo en support voor FaceBook en LiveId. Mocht de site er niet goed uit zien, druk op Ctrl+F5.<br />
+<strong>09-01-2011:</strong> Grote update: Migratie naar MVC3 Razor, uitbreiding in profiel data.<br />
+<strong>03-12-2010:</strong> Forum voor iedereen toegankelijk gemaakt, voor posten moet je inloggen.<br />
+<strong>27-11-2010:</strong> Fotos toegevoegd.<br />
+<strong>21-11-2010:</strong> Nieuwe fotos toegevoegd.<br />
+<strong>24-10-2010:</strong> Kleine update aan het forum gedaan.<br />
+<strong>17-10-2010:</strong> Forum is geupdate, het is nu mogelijk om berichten te posten! De komende tijd zal dit nog worden uitgebreid en verbeterd!<br />
+<strong>14-10-2010:</strong> Weer nieuwe foto's geupload. Kijk onder <%= Html.ActionLink("zwaluwpark", "Zwaluwpark" ) %> om deze te bekijken.<br />
+<strong>04-10-2010:</strong> Er wordt hard aan het forum gebouwt. Mocht je bepaalde onderwerpen willen, neem van contact met mij op.<br />
+<strong>25-09-2010:</strong> Nieuwbouwdag was gezellig, nieuwe foto's kan je <%= Html.ActionLink("hier", "Zwaluwpark" ) %> bekijken.<br />
+<strong>22-09-2010:</strong> Site geeft nu ook de twitter berichten weer. Binnenkort komt het forum online.<br />
+<strong>18-09-2010:</strong> Volgende week zaterdag (25 sept) is zwaluwpark weer geopend voor de Nationale nieuwbouwdag. Je kan er terecht van 11:00 uur tot 15:00 uur.<br />
+<strong>15-09-2010:</strong> Ze zijn begonnen met de fundering, enkele foto's van vandaag kan je <%= Html.ActionLink("hier", "Zwaluwpark" ) %> bekijken.<br />
+<strong>14-09-2010:</strong> We hebben ook twitter voor snelle updates, in ieder geval 1x per week proberen we een status update te geven. <a href="http://www.twitter.com/zwaluwpark" target="_blank">#zwaluwpark</a>
+*@

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SQL2008_736112_zwaluwpark" Class="DataModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=esql2k802.discountasp.net;Initial Catalog=SQL2008_736112_zwaluwpark;Persist Security Info=True;User ID=SQL2008_736112_zwaluwpark_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NF.Framework.Base.Properties.Settings.NF_Framework_DatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Article" Member="Articles">
+    <Type Name="Article">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Body" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ContentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Published" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ActiveFrom" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="ActiveUntil" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserProfile" Member="UserProfiles">
+    <Type Name="UserProfile">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="FriendlyName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="HouseNbr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAddress" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="HyvesUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="FacebookUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="LinkedInUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Share" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.Int32" DbType="Int NULL" CanBeNull="true" />
+      <Column Name="ProfileVersion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="UserProfile_ForumPollOptionVote" Member="ForumPollOptionVotes" ThisKey="Id" OtherKey="UserProfileId" Type="ForumPollOptionVote" />
+      <Association Name="UserProfile_ForumPost" Member="ForumPosts" ThisKey="Id" OtherKey="UserProfileId" Type="ForumPost" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticleComment" Member="ArticleComments">
+    <Type Name="ArticleComment">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Body" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Created" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForumCategory" Member="ForumCategories">
+    <Type Name="ForumCategory">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Ip" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="ForumCategory_ForumSubCategory" Member="ForumSubCategories" ThisKey="Id" OtherKey="ForumCategoryId" Type="ForumSubCategory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForumPollOption" Member="ForumPollOptions">
+    <Type Name="ForumPollOption">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ForumPostId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="ForumPollOption_ForumPollOptionVote" Member="ForumPollOptionVotes" ThisKey="Id" OtherKey="ForumPollOptionId" Type="ForumPollOptionVote" />
+      <Association Name="ForumPost_ForumPollOption" Member="ForumPost" ThisKey="ForumPostId" OtherKey="Id" Type="ForumPost" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForumPollOptionVote" Member="ForumPollOptionVotes">
+    <Type Name="ForumPollOptionVote">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ForumPollOptionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Ip" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="ForumPollOption_ForumPollOptionVote" Member="ForumPollOption" ThisKey="ForumPollOptionId" OtherKey="Id" Type="ForumPollOption" IsForeignKey="true" />
+      <Association Name="UserProfile_ForumPollOptionVote" Member="UserProfile" ThisKey="UserProfileId" OtherKey="Id" Type="UserProfile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForumPost" Member="ForumPosts">
+    <Type Name="ForumPost">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ForumSubCategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ParentForumPostId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(90) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsPoll" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Ip" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="ForumPost_ForumPollOption" Member="ForumPollOptions" ThisKey="Id" OtherKey="ForumPostId" Type="ForumPollOption" />
+      <Association Name="ForumPost_ForumPost" Member="ForumPosts" ThisKey="Id" OtherKey="ParentForumPostId" Type="ForumPost" />
+      <Association Name="ForumPost_ForumPost" Member="ForumPost1" ThisKey="ParentForumPostId" OtherKey="Id" Type="ForumPost" IsForeignKey="true" />
+      <Association Name="UserProfile_ForumPost" Member="UserProfile" ThisKey="UserProfileId" OtherKey="Id" Type="UserProfile" IsForeignKey="true" />
+      <Association Name="ForumSubCategory_ForumPost" Member="ForumSubCategory" ThisKey="ForumSubCategoryId" OtherKey="Id" Type="ForumSubCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ForumSubCategory" Member="ForumSubCategories">
+    <Type Name="ForumSubCategory">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ForumCategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Ip" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="LastPostDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PostCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastPostByUserProfileId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ForumSubCategory_ForumPost" Member="ForumPosts" ThisKey="Id" OtherKey="ForumSubCategoryId" Type="ForumPost" />
+      <Association Name="ForumCategory_ForumSubCategory" Member="ForumCategory" ThisKey="ForumCategoryId" OtherKey="Id" Type="ForumCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoginLog" Member="LoginLogs">
+    <Type Name="LoginLog">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserProfileId" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LoginDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserIp" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

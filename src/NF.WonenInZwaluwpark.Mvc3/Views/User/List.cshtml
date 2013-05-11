@@ -1,0 +1,49 @@
+﻿@model IEnumerable<NF.WonenInZwaluwpark.Mvc3.Models.UserProfile>
+@{
+    ViewBag.Title = "Bewonerslijst";
+}
+
+<h1>Bewonerslijst</h1>
+<div id="forum">
+<table class="categories">
+<tr class="category">
+    <th>&nbsp;</th><th>Bouwnr</th><th style="width:300px">Naam</th><th style="width:200px">Straat</th><th style="width:100px">Postcode</th><th>Plaats</th>
+</tr>
+@{ var cssOdd = string.Empty; }
+@for (int bouwNbr = 1; bouwNbr < 105; bouwNbr++)
+{
+<text>
+    @{
+        var user = Model.Where( a=> a.HouseNbr == bouwNbr ).OrderByDescending( b => b.Share ).FirstOrDefault();
+        var userCount = Model.Where(a => a.HouseNbr == bouwNbr).Count();
+        string adres;
+        string zipcode;
+        int? gender = (user == null) ? null : user.Gender;
+        if (bouwNbr < 37)
+        {
+            adres = "Groot vijverdal " + bouwNbr;
+            zipcode = "6822 MB";
+        }
+        else
+        {
+            adres = "Klein vijverdal " + (bouwNbr - 36);
+            zipcode = "6822 MA";
+        }
+    }
+    @if (user == null)
+    {
+        <tr class="subcategory @cssOdd"><td>@Html.GenderToImage( gender )</td><td>@bouwNbr</td><td>-</td><td>@adres</td><td>@zipcode</td><td>Arnhem</td></tr>
+    }
+    else if (!user.Share)
+    {
+        <tr class="subcategory @cssOdd"><td>@Html.GenderToImage( gender )</td><td>@bouwNbr</td><td>-</td><td>@adres</td><td>@zipcode</td><td>Arnhem</td></tr>
+    }
+    else
+    {
+        <tr class="subcategory @cssOdd"><td>@Html.GenderToImage( gender )</td><td>@bouwNbr</td><td>@Html.ActionLink( user.FriendlyName, "Details", new{id=user.Id}) <span class="light">@(userCount > 1 ? string.Format("+({0})", userCount) : "")</span></td><td>@adres</td><td>@zipcode</td><td>Arnhem</td></tr>
+    }
+    @{ cssOdd = cssOdd == "odd" ? string.Empty : "odd"; }
+</text>
+}
+</table>
+</div>

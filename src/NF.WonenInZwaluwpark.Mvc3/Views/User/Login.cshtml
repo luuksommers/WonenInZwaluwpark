@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Inloggen";
+}
+
+<h1>Inloggen</h1>
+
+@if (ViewData["Message"] != null) {
+	<div class="errorbox">
+		@ViewData["Message"]
+	</div>
+}
+	
+<form action="OpenId?ReturnUrl=@HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"])" method="post" onsubmit="if(!this.checkValidity()) return false">
+    <p>Om het voor jou zo makkelijk mogelijk te maken, hebben we het mogelijk gemaakt om via externe websites zoals Google, Hyves en Yahoo in te loggen.<br />
+       Klik op het icoon van je keuze, vul je gegevens in en je bent ingelogd!</p>
+    <a class="openid google" href="https://www.google.com/accounts/o8/id"></a>
+    <a class="openid yahoo" href="http://www.yahoo.com/"></a>
+    <a class="openid hyves" href="http://www.hyves.nl/"></a>
+    <a class="openid myspace" href="http://www.myspace.com/"></a>
+    <a class="openid flickr" href="http://www.flickr.com/"></a>
+    <a class="openid myopenid" href="http://www.myopenid.com/"></a>
+    <a class="openid facebook" onclick="javascript:facebook()"></a>
+    <a class="openid liveid" onclick="javascript:liveid()"></a>
+
+    <div class="clear"></div>
+	<label for="openid_identifier">Of, voer handmatig een OpenID in:</label>
+	<input id="openid_identifier" type="url" name="openid_identifier" size="40" autofocus />
+	<input id="openid_submit" type="submit" value="Login" />
+</form>
+
+<script type="text/javascript">
+	document.getElementById("openid_identifier").focus();
+	$(".openid").click(function () {
+	    var openIdUrl = $(this).attr("href");
+	    $("#openid_identifier").val(openIdUrl);
+	    $(this).parent("form").submit();
+	    return false;
+	});
+
+	twitter = function () {
+	    $("form").attr("action", "Twitter?ReturnUrl=@HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"])");
+	    $("form").submit();
+	}
+
+	facebook = function () {
+	    $("form").attr("action", "Facebook?ReturnUrl=@HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"])");
+	    $("form").submit();
+	}
+
+	liveid = function () {
+	    $("form").attr("action", "LiveId?ReturnUrl=@HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"])");
+	    $("form").submit();
+	}
+</script>
+
+

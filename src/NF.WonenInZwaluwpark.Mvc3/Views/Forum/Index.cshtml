@@ -1,0 +1,40 @@
+﻿@model NF.WonenInZwaluwpark.Mvc3.Models.ForumIndexVM
+@{
+    ViewBag.Title = "Forum";
+}
+
+<h1>Forum</h1>
+<div id="forum">
+<table class="categories" cellpadding="3">
+@foreach( var item in Model.Categories ) {
+    <text>
+    <tr class="category"><th class="title">@item.Title</th><th class="description">@item.Description</th><th>Laatste post</th><th>Aantal</th></tr>
+    @{
+         var oddCss = "";
+     }
+    @foreach( var sub in Model.SubCategories.Where( a => a.ForumCategoryId == item.Id ) ) {
+        <text>
+        <tr class="subcategory @oddCss">
+            <td>@Html.ActionLink(sub.Title, "Cat", new { id = sub.Id }, new { @class = "large" })</td>
+            <td>@sub.Description</td>
+            @{ var unread = sub.LastPostDate.HasValue && Model.LastVisit.HasValue && sub.LastPostDate.Value > Model.LastVisit.Value ? "unread" : ""; }
+            <td class="postedby @unread">
+                @if(sub.LastPostDate.HasValue) {
+                    <text>
+                    @sub.LastPostDate.Value.ToString("dd-MM-yyyy HH:mm:ss" )<br />
+                    @Model.UserProfiles.Where(a => a.Id == sub.LastPostByUserProfileId).Select(a => a.FriendlyName).FirstOrDefault()
+                    </text>
+                }
+            </td>
+            <td>@sub.PostCount</td>
+        </tr>
+        @{ oddCss = oddCss == "odd" ? string.Empty : "odd"; }
+        </text>
+    }
+    
+    <tr><td colspan="2">&nbsp;</td></tr>
+    </text>
+}
+</table>
+</div>
+

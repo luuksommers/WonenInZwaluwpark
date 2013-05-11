@@ -1,0 +1,63 @@
+﻿
+@model NF.WonenInZwaluwpark.Mvc3.Models.CatIndexVM
+@{
+    ViewBag.Title = Model.SubCatagory.Title;
+}
+
+<h1>@Model.SubCatagory.Title</h1>
+<div id="forum">
+    @if (Model.ForumPosts.Length > 0)
+    {
+        <text>
+        <table class="categories" cellpadding="3">
+        <tr class="category"><th class="title">Post</th><th style="width:200px">Aangemaakt door</th><th style="width:200px">Op</th><th style="width:200px">Laatste post</th></tr>
+        @{ var cssOdd = string.Empty; }
+        @foreach (var item in Model.ForumPostOrder.OrderByDescending(b=>b.Value).Select(a=>Model.ForumPosts.Single(b=>b.Id == a.Key)))
+        {
+            <text>
+            <tr class="subcategory @cssOdd">
+                <td>@Html.ActionLink(item.Title, "Post", new { id = item.Id })</td>
+                <td>@Model.UserProfiles.Where( a=> a.Id == item.UserProfileId ).First().FriendlyName</td>
+                <td>@string.Format("{0:dd-MM-yyyy HH:mm:ss }", item.DateCreated)</td>
+                @{ var lastPost = Model.LastPosts.Where(a=> a.ParentForumPostId == item.Id ).FirstOrDefault(); }
+                @{ var unread = lastPost != null && Model.LastVisit.HasValue && lastPost.DateCreated > Model.LastVisit.Value ? "unread" : ""; }
+                <td class="postedby @unread">
+                    @if ( lastPost != null ) {
+                        <text>
+                        @lastPost.DateCreated.ToString("dd-MM-yyyy HH:mm:ss")<br />
+                        @Model.UserProfiles.Where(a => a.Id == lastPost.UserProfileId).Select(a => a.FriendlyName).FirstOrDefault()
+                        </text>
+                    }
+                </td>
+            </tr>
+            @{ cssOdd = cssOdd == "odd" ? string.Empty : "odd"; }
+            </text>
+        }
+        </table>
+        </text>
+    } else {
+        <text>Geen forum posts gevonden.</text>
+    }
+
+    @if (Model.HasPrevPage || Model.HasNextPage)
+    {
+    <div id="pager">
+    @if (Model.HasPrevPage)
+    {
+        if (Model.CurrentPage - 1 == 0)
+        {
+            @Html.ActionLink("<< Vorige pagina", "Cat", new { id = Model.SubCatagory.Id })
+        }
+        else
+        {
+            @Html.ActionLink("<< Vorige pagina", "Cat", new { id = Model.SubCatagory.Id, page = Model.CurrentPage - 1 })
+        }
+    }
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Volgende pagina >>", "Cat", new { id = Model.SubCatagory.Id, page = Model.CurrentPage + 1 })
+    }
+    </div>
+    }
+     <p>@Html.ActionLink("Terug", "Index", null, new { @class = "button back" }) @Html.ActionLink("Nieuwe post", "CreatePost", new { id = Model.SubCatagory.Id }, new { @class = "button add" })</p>
+</div>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NF.WonenInZwaluwpark.Database", "NF.WonenInZwaluwpark.Database\NF.WonenInZwaluwpark.Database.sqlproj", "{06FA736F-5974-4760-B901-B3B2756F1521}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NF.WonenInZwaluwpark.Mvc3", "NF.WonenInZwaluwpark.Mvc3\NF.WonenInZwaluwpark.Mvc3.csproj", "{41105D01-BBC0-4AB9-81D6-4662BC581B5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06FA736F-5974-4760-B901-B3B2756F1521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06FA736F-5974-4760-B901-B3B2756F1521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06FA736F-5974-4760-B901-B3B2756F1521}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{06FA736F-5974-4760-B901-B3B2756F1521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06FA736F-5974-4760-B901-B3B2756F1521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06FA736F-5974-4760-B901-B3B2756F1521}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{41105D01-BBC0-4AB9-81D6-4662BC581B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41105D01-BBC0-4AB9-81D6-4662BC581B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41105D01-BBC0-4AB9-81D6-4662BC581B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41105D01-BBC0-4AB9-81D6-4662BC581B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

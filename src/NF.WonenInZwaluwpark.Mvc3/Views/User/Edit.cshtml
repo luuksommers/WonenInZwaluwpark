@@ -1,0 +1,44 @@
+﻿@model NF.WonenInZwaluwpark.Mvc3.Models.UserProfile
+@{
+    ViewBag.Title = "Bewerk profiel";
+}
+
+    <h2>Bewerk profiel</h2>
+    @if(!ViewData.ModelState.IsValid){
+    <div id="editError" class="errorbox">
+        @Html.ValidationSummary()
+    </div>
+    }
+    
+    <form id="editForm" method="post" action="@Url.Action("Edit", "User")" onsubmit="if(!this.checkValidity()) return false">
+      <label for="FriendlyName">Je naam:</label>
+      <input id="FriendlyName" name="FriendlyName" autofocus required value="@Model.FriendlyName">@Html.ValidationMessage("FriendlyName", " *")
+      <label for="Gender">Geslacht:</label>
+      <label><input type="radio" name="Gender" value="1" @(Model.Gender == 1 ? "checked" : string.Empty)><img src="@Url.Content("~/Images/user.png")" alt="Man" /></label>
+      <label><input type="radio" name="Gender" value="2" @(Model.Gender == 2 ? "checked" : string.Empty)><img src="@Url.Content("~/Images/user-green-female.png")" alt="Man" /></label>
+      <label><input type="radio" name="Gender" value="3" @(Model.Gender == 3 ? "checked" : string.Empty)><img src="@Url.Content("~/Images/users.png")" alt="Man" /></label>@Html.ValidationMessage("Gender", " *")
+      <label for="EmailAddress">E-mailadres:</label>
+      <input id="EmailAddress" name="EmailAddress" type="email" maxlength="200" required value="@Model.EmailAddress">@Html.ValidationMessage("EmailAddress", " *")
+      <label for="HouseNbr">Bouwnummer:</label>
+      <input id="HouseNbr" name="HouseNbr" type="number" min="1" max="103" style="width:50px;" required value="@Model.HouseNbr">@Html.ValidationMessage("HouseNbr", " *")
+      <label for="Hyves">Hyves pagina:</label>
+      <input id="HyvesUrl" name="HyvesUrl" type="url" maxlength="200" style="width:300px;" value="@Model.HyvesUrl">@Html.ValidationMessage("HyvesUrl", " *")
+      <label for="FacebookUrl">Facebook pagina:</label>
+      <input id="FacebookUrl" name="FacebookUrl" type="url" maxlength="200" style="width:300px;" value="@Model.FacebookUrl">@Html.ValidationMessage("FacebookUrl", " *")
+      <label for="LinkedInUrl">LinkedIn pagina:</label>
+      <input id="LinkedInUrl" name="LinkedInUrl" type="url" maxlength="200" style="width:300px;" value="@Model.LinkedInUrl">@Html.ValidationMessage("LinkedInUrl", " *")
+      <label for="Share">Maak je gegevens zichtbaar voor andere leden:</label>
+      @Html.CheckBoxFor(a => Model.Share, new { style = "width:auto;" })
+      <p>
+      <input type="submit" value="Opslaan">
+      </p>
+    </form>
+
+  <script type="text/javascript">
+      $(function () {
+          if (!("autofocus" in document.createElement("input"))) {
+              document.getElementById("friendlyname").focus();
+          }
+      });
+  </script>
+

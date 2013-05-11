@@ -1,0 +1,25 @@
+﻿@model NF.WonenInZwaluwpark.Mvc3.Models.PostIndexVM
+@{
+    ViewBag.Title = Model.SubCatagory.Title + " - Post " + Model.Post.Title;
+}
+
+<h1>@Model.SubCatagory.Title - Post @Model.Post.Title</h1>
+
+<div id="forum">
+    <h2>@Model.Post.Title</h2>
+    <div class="reply">
+        <div class="info"><div class="text">@Model.UserProfiles.Where(a => a.Id == Model.Post.UserProfileId).First().FriendlyName (bwnr @Model.UserProfiles.Where(a => a.Id == Model.Post.UserProfileId).First().HouseNbr) op @Model.Post.DateCreated.ToString("dd-MM-yyyy HH:mm:ss")</div></div>
+        <div class="content">@Html.Raw(Model.Post.Content.Replace("\n", "<br />"))</div>
+    </div>
+
+    <h3>Antwoorden</h3>
+    @foreach (var reply in Model.Replies)
+    {
+    <div class="reply">
+        <div class="info"><div class="text">@Model.UserProfiles.Where(a => a.Id == reply.UserProfileId).First().FriendlyName (bwnr @Model.UserProfiles.Where(a => a.Id == reply.UserProfileId).First().HouseNbr) op @reply.DateCreated.ToString("dd-MM-yyyy HH:mm:ss")</div></div>
+        <div class="content">@Html.Raw(reply.Content.Replace("\n", "<br />"))</div>
+    </div>
+    }
+    
+    <p>@Html.ActionLink("Terug", "Cat", new { id = Model.SubCatagory.Id }, new { @class = "button back" }) @Html.ActionLink("Antwoord", "CreatePost", new { id = Model.Post.ForumSubCategoryId, replyTo = Model.Post.Id }, new { @class = "button add" })</p>
+</div>

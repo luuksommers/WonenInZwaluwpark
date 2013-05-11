@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Zwaluwpark";
+}
+
+<h1>Zwaluwpark</h1>
+<div style="float:left;width:59%">
+    <h2>Het plan in het kort</h2>
+    Zwaluwpark bestaat uit twee woongebouwen, waarvan een gebouw met 36 eengezinswoningen en een gebouw met 68 appartementen. Parkeren gebeurt in de ondergrondse garage waar ook de fietsenstalling en de bergingen zijn.
+    <h2>Het gemak van de stad, het gevoel van wonen in het groen</h2>
+    Zwaluwpark komt te liggen in een nieuw aangelegd park. Dit park is direct verbonden met het naastgelegen Park Klarenbeek. Beide woongebouwen hebben een ruime binnentuin.
+    <h2>Krachtige architectuur</h2>
+    Het ontwerp is van <a href="http://www.mecanoo.com/" target="_blank">Mecanoo architecten</a>. Bij het ontwerp is uitgegaan van moderne architectuur passend binnen een stedelijke maar vooral ook groene omgeving. Design is niet alleen iets mooi maken, een goed ontwerp versterkt de functionaliteit. Vanuit uw woning ervaart u maximaal de bijzondere ligging in het park.
+</div>
+<div style="float:right;width:40%">
+    <h2>Locatie</h2>
+    <div id="map_canvas" style="width:100%; height:300px"></div>
+</div>
+<div class="clear"></div>
+
+@section Header
+{
+    <script type="text/javascript">
+        document.write(
+      '<script src="http://www.google.com/jsapi?key=' +
+      ({
+          'woneninzwaluwpark.nl': 'ABQIAAAATDWKMHxRKWOCUudo_7Ju_xQh3TDLzVwa6g9LD-WI5teOuSoUVhQZhJbOocsNMirYSxF_5YOt5Qaqsw'
+      }[location.host] || 'ABQIAAAATDWKMHxRKWOCUudo_7Ju_xQh3TDLzVwa6g9LD-WI5teOuSoUVhQZhJbOocsNMirYSxF_5YOt5Qaqsw') +
+      '" type="text/javascript"><\/script>');
+    </script>
+
+    <script type="text/javascript">
+        google.load("maps", "3", { other_params: "sensor=false" });
+        $(function () {
+            var latlng = new google.maps.LatLng(51.993218, 5.92412);
+            var myOptions = {
+                zoom: 16,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        });
+    </script>
+}

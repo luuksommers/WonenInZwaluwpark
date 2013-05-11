@@ -1,0 +1,32 @@
+﻿@model NF.WonenInZwaluwpark.Mvc3.Models.ForumPost
+@{
+    ViewBag.Title = "Post toevoegen";
+}
+
+    <h2>Post toevoegen</h2>
+
+    @if(!ViewData.ModelState.IsValid){
+    <div id="editError" class="errorbox">
+        @Html.ValidationSummary()
+    </div>
+    }
+    
+    <form id="editForm" method="post" action="@Url.Action("CreatePost", "Forum", new{id=Model.ForumSubCategoryId, replyTo=Model.ParentForumPostId})" onsubmit="if(!this.checkValidity()) return false">
+        @if(Model.ParentForumPostId == null ) {
+          @Html.LabelFor(model => model.Title)
+          @Html.TextBoxFor(model => model.Title) @Html.ValidationMessageFor(model => model.Title, " *")
+        } else {
+            @Html.HiddenFor(model => model.Title )
+        }
+        @Html.LabelFor(model => model.Content)
+        @Html.TextAreaFor(model => model.Content) @Html.ValidationMessageFor(model => model.Content, " *")
+        <p><input type="submit" value="Opslaan" /></p>
+    </form>
+
+    <div>
+    @if (Model.ParentForumPostId == null) {
+        @Html.ActionLink("Terug", "Cat", new { id = Model.ForumSubCategoryId }, new { @class = "button back" })
+    } else {
+        @Html.ActionLink("Terug", "Post", new { id = Model.ParentForumPostId }, new { @class = "button back" })
+    }
+    </div>
